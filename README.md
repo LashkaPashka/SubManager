@@ -32,7 +32,26 @@
     DB_NAME=submanager
     ```
 
-3.  Соберите и запустите сервис:
+3. Настройте конфиг приложения в `./SubManager/config/prod.yaml`:
+
+    ```yaml
+    env: "prod"
+    storage_path: "postgres://postgres:root@postgres:5432/submanager"
+    http_server:
+      address: "0.0.0.0:8080"
+      timeout: 4s
+      idle_timeout: 30s
+    ```
+
+4. Настройте переменные окружения для миграций и запуска сервера `.SubManager/.env`:
+
+    ```env
+    migration_dir="./migrations"
+    migration_dsn="host=postgres port=5432 dbname=submanager user=postgres password=root sslmode=disable"
+    config_path="./config/prod.yaml"
+    ```
+
+5.  Соберите и запустите сервис:
 
     ```bash
     docker-compose up -d
