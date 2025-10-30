@@ -18,8 +18,8 @@
 1.  Клонируйте репозиторий:
 
     ```bash
-    git clone https://github.com/<your_username>/SubscriptionManager.git
-    cd SubscriptionManager
+    git clone https://github.com/LashkaPashka/SubManager.git
+    cd SubManager
     ```
 
 2.  Настройте переменные окружения в `.env`:
@@ -29,22 +29,17 @@
     DB_PORT=5432
     DB_USER=postgres
     DB_PASSWORD=yourpassword
-    DB_NAME=subscriptions_db
+    DB_NAME=submanager
     ```
 
-3.  Запустите миграции:
+3.  Соберите и запустите сервис:
 
     ```bash
-    docker-compose run subManager ./bin/goose -dir ./migrations postgres "$MIGRATION_DSN" up -v
-    ```
-
-4.  Соберите и запустите сервис:
-
-    ```bash
-    docker-compose up --build
+    docker-compose up -d
     ```
 
 API будет доступен по адресу: `http://localhost:8080`
+Swagger API будет доступен по адресу: `http://localhost:8080/swagger/`
 
 ---
 
@@ -93,7 +88,7 @@ API будет доступен по адресу: `http://localhost:8080`
   "subscriptions": [
     {
       "service_name": "Netflix",
-      "user_id": "u12345",
+      "user_id": "60601fee-2bf1-4721-ae6f-7636e79a0cba",
       "price": 899,
       "start_date": "01-2024",
       "end_date": "01-2025"
@@ -112,8 +107,8 @@ API будет доступен по адресу: `http://localhost:8080`
 
 ```json
 {
-  "subscription_id": "3234234",
-  "user_id": "u23423423uid"
+  "subscription_id": "123e4567-e89b-12d3-a456-426614174000",
+  "user_id": "60601fee-2bf1-4721-ae6f-7636e79a0cba"
 }
 ```
 
@@ -133,8 +128,8 @@ API будет доступен по адресу: `http://localhost:8080`
 
 ```json
 {
-  "sub_id": "3234234",
-  "user_id": "u12345",
+  "sub_id": "123e4567-e89b-12d3-a456-426614174000",
+  "user_id": "60601fee-2bf1-4721-ae6f-7636e79a0cba",
   "price": 999
 }
 ```
@@ -143,8 +138,8 @@ API будет доступен по адресу: `http://localhost:8080`
 
 ```json
 {
-  "sub_id": "3234234",
-  "user_id": "u12345",
+  "sub_id": "123e4567-e89b-12d3-a456-426614174000",
+  "user_id": "60601fee-2bf1-4721-ae6f-7636e79a0cba",
   "service_name": "Netflix",
   "price": 999
 }
@@ -210,7 +205,7 @@ API будет доступен по адресу: `http://localhost:8080`
   "subscriptions": [
     {
       "service_name": "Netflix",
-      "user_id": "u12345",
+      "user_id": "60601fee-2bf1-4721-ae6f-7636e79a0cba",
       "price": 899,
       "start_date": "01-2024",
       "end_date": "01-2025"
@@ -234,8 +229,8 @@ API будет доступен по адресу: `http://localhost:8080`
 
 ```json
 {
-  "sub_id": "3234234",
-  "user_id": "u12345",
+  "sub_id": "123e4567-e89b-12d3-a456-426614174000",
+  "user_id": "123e4567-e89b-12d3-a456-426614174000",
   "service_name": "Netflix",
   "price": 999
 }
