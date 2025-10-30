@@ -1,0 +1,246 @@
+basePath: /
+definitions:
+  model.SubscriptionInputModel:
+    properties:
+      end_date:
+        type: string
+      price:
+        type: integer
+      service_name:
+        type: string
+      start_date:
+        type: string
+      user_id:
+        type: string
+    type: object
+  payloadcreate.SubscriptionRequest:
+    properties:
+      end_date:
+        example: 08-2025
+        type: string
+      price:
+        example: 400
+        type: integer
+      service_name:
+        example: Yandex Plus
+        type: string
+      start_date:
+        example: 07-2025
+        type: string
+      user_id:
+        example: 60601fee-2bf1-4721-ae6f-7636e79a0cba
+        type: string
+    type: object
+  payloaddelete.SubscriptionRequest:
+    properties:
+      subscription_id:
+        example: "3234234"
+        type: string
+      user_id:
+        example: u23423423uid
+        type: string
+    type: object
+  payloadget.SubscriptionsResponse:
+    properties:
+      subscriptions:
+        items:
+          $ref: '#/definitions/model.SubscriptionInputModel'
+        type: array
+    type: object
+  payloadprice.ResponseDate:
+    properties:
+      month:
+        example: 09-2025
+        type: string
+      service_name:
+        example: Netflix
+        type: string
+      total_sum:
+        example: 400
+        type: integer
+      user_id:
+        example: 60601fee-2bf1-4721-ae6f-7636e79a0cba
+        type: string
+    type: object
+  payloadupdate.SubscriptionRequest:
+    properties:
+      price:
+        type: integer
+      sub_id:
+        type: string
+      user_id:
+        type: string
+    type: object
+  payloadupdate.SubscriptionResponse:
+    properties:
+      price:
+        type: integer
+      service_name:
+        type: string
+      sub_id:
+        type: string
+      user_id:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API для работы с подписками пользователей.
+  title: Subscription Manager API
+  version: "1.0"
+paths:
+  /subscriptions:
+    delete:
+      consumes:
+      - application/json
+      description: Удаляет подписку в базе данных
+      parameters:
+      - description: Данные сервиса
+        in: body
+        name: subscription
+        required: true
+        schema:
+          $ref: '#/definitions/payloaddelete.SubscriptionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Subscription was deleted!
+          schema:
+            type: string
+        "400":
+          description: Invalid request. Please check the submitted data.
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Удалить подписку
+      tags:
+      - subscriptions
+    get:
+      consumes:
+      - application/json
+      description: Получает подписки конкретного пользователя из базы данных
+      parameters:
+      - description: ID пользователя
+        in: query
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/payloadget.SubscriptionsResponse'
+        "400":
+          description: Invalid request. Please check the submitted data.
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Получить подписки
+      tags:
+      - subscriptions
+    patch:
+      consumes:
+      - application/json
+      description: Обновляет цену подписки конкретного пользователя в базе данных
+      parameters:
+      - description: Данные для изменения
+        in: body
+        name: subscription
+        required: true
+        schema:
+          $ref: '#/definitions/payloadupdate.SubscriptionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/payloadupdate.SubscriptionResponse'
+        "400":
+          description: Invalid request. Please check the submitted data.
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Обновить подписку
+      tags:
+      - subscriptions
+    post:
+      consumes:
+      - application/json
+      description: Создаёт подписку в базе данных
+      parameters:
+      - description: Название сервиса
+        in: body
+        name: subscription
+        required: true
+        schema:
+          $ref: '#/definitions/payloadcreate.SubscriptionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Subscription was created!
+          schema:
+            type: string
+        "400":
+          description: Invalid request. Please check the submitted data.
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Создать подписку
+      tags:
+      - subscriptions
+  /subscriptions/total:
+    get:
+      consumes:
+      - application/json
+      description: 'Возвращает итоговую сумму по переданным параметрам: только по
+        дате, по дате и userID или по дате и названию сервиса.'
+      parameters:
+      - description: Месяц и год (MM-YYYY)
+        in: query
+        name: month
+        required: true
+        type: string
+      - description: ID пользователя (UUID)
+        in: query
+        name: user_id
+        type: string
+      - description: Название сервиса (например, Netflix)
+        in: query
+        name: service_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/payloadprice.ResponseDate'
+        "400":
+          description: Invalid request. Please check the submitted data.
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+      summary: Получить итоговую сумму
+      tags:
+      - subscriptions
+swagger: "2.0"
