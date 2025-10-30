@@ -1,6 +1,6 @@
-env: "prod"
-storage_path: "postgres://postgres:root@postgres:5432/submanager"
+env:
+storage_path:
 http_server:
-  address: "0.0.0.0:8080"
-  timeout: 4s
-  idle_timeout: 30s
+  address:
+  timeout:
+  idle_timeout:
