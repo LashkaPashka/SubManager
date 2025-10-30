@@ -34,10 +34,10 @@ definitions:
   payloaddelete.SubscriptionRequest:
     properties:
       subscription_id:
-        example: "3234234"
+        example: 123e4567-e89b-12d3-a456-426614174000
         type: string
       user_id:
-        example: u23423423uid
+        example: 123e4567-e89b-12d3-a456-426614174000
         type: string
     type: object
   payloadget.SubscriptionsResponse:
@@ -59,7 +59,7 @@ definitions:
         example: 400
         type: integer
       user_id:
-        example: 60601fee-2bf1-4721-ae6f-7636e79a0cba
+        example: 123e4567-e89b-12d3-a456-426614174000
         type: string
     type: object
   payloadupdate.SubscriptionRequest:
@@ -76,8 +76,6 @@ definitions:
       price:
         type: integer
       service_name:
-        type: string
-      sub_id:
         type: string
       user_id:
         type: string

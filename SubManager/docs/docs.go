@@ -299,11 +299,11 @@ const docTemplate = `{
             "properties": {
                 "subscription_id": {
                     "type": "string",
-                    "example": "3234234"
+                    "example": "123e4567-e89b-12d3-a456-426614174000"
                 },
                 "user_id": {
                     "type": "string",
-                    "example": "u23423423uid"
+                    "example": "123e4567-e89b-12d3-a456-426614174000"
                 }
             }
         },
@@ -335,7 +335,7 @@ const docTemplate = `{
                 },
                 "user_id": {
                     "type": "string",
-                    "example": "60601fee-2bf1-4721-ae6f-7636e79a0cba"
+                    "example": "123e4567-e89b-12d3-a456-426614174000"
                 }
             }
         },
@@ -360,9 +360,6 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "service_name": {
-                    "type": "string"
-                },
-                "sub_id": {
                     "type": "string"
                 },
                 "user_id": {
