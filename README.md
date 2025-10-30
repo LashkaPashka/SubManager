@@ -39,6 +39,7 @@
     ```
 
 API будет доступен по адресу: `http://localhost:8080`
+
 Swagger API будет доступен по адресу: `http://localhost:8080/swagger/`
 
 ---
